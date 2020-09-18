@@ -1,14 +1,14 @@
 
-def reverse_list(l):
+def reverse_list(list):
     """
     Reverses order of elements in list l.
     """
-    return None
+
+    return list[::-1]
 
 
 def test_reverse_list():
     assert reverse_list([1, 2, 3, 4, 5]) == [5, 4, 3, 2, 1]
-
 
 # ------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ def reverse_string(s):
     """
     Reverses order of characters in string s.
     """
-    return None
+    return s[::-1]
 
 
 def test_reverse_string():
@@ -25,12 +25,13 @@ def test_reverse_string():
 
 # ------------------------------------------------------------------------------
 
-def is_english_vowel(c):
+def is_english_vowel(char):
     """
     Returns True if c is an english vowel
     and False otherwise.
     """
-    return None
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+    return char.lower() in vowels
 
 
 def test_is_english_vowel():
@@ -57,7 +58,12 @@ def count_num_vowels(s):
     """
     Returns the number of vowels in a string s.
     """
-    return None
+    vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+    num_vowels = 0
+    for char in s.lower():
+        if char in vowels:
+            num_vowels += 1
+    return num_vowels
 
 
 def test_count_num_vowels():
@@ -79,7 +85,16 @@ def histogram(l):
     """
     Converts a list of integers into a simple string histogram.
     """
-    return None
+    char = "#"
+    result = ""
+    index = 0
+    for item in l:
+        result += (char * item)
+        if index < len(l) - 1:
+            result += "\n"
+        index += 1
+
+    return result
 
 
 def test_histogram():
@@ -93,7 +108,7 @@ def get_word_lengths(s):
     Returns a list of integers representing
     the word lengths in string s.
     """
-    return None
+    return [len(word) for word in s.split(" ")]
 
 
 def test_get_word_lengths():
@@ -108,7 +123,13 @@ def find_longest_word(s):
     Returns the longest word in string s.
     In case there are several, return the first.
     """
-    return None
+    last_longest = -1
+    cur_word = ''
+    for word in s.split(" "):
+        if len(word) > last_longest:
+            cur_word = word
+            last_longest = len(word)
+    return cur_word
 
 
 def test_find_longest_word():
@@ -125,7 +146,11 @@ def validate_dna(s):
     Return True if the DNA string only contains characters
     a, c, t, or g (lower or uppercase). False otherwise.
     """
-    return None
+    dna = {'a', 'c', 't', 'g'}
+
+    dna_set = set(s.lower())
+
+    return dna_set.issubset(dna)
 
 
 def test_validate_dna():
@@ -142,7 +167,17 @@ def base_pair(c):
     of the base pair. If the base is not recognized,
     return 'unknown'.
     """
-    return None
+    dna = {
+        'a': 't',
+        't': 'a',
+        'c': 'g',
+        'g': 'c'
+    }
+    low = c.lower()
+    if low not in dna:
+        return "unknown"
+
+    return dna.get(low)
 
 
 def test_base_pair():
@@ -165,7 +200,7 @@ def transcribe_dna_to_rna(s):
     Return string s with each letter T replaced by U.
     Result is always uppercase.
     """
-    return None
+    return s.upper().replace('T', 'U')
 
 
 def test_transcribe_dna_to_rna():
@@ -180,7 +215,10 @@ def get_complement(s):
     Return the DNA complement in uppercase
     (A -> T, T-> A, C -> G, G-> C).
     """
-    return None
+
+    s = s.upper().replace("A", "Z").replace("T", "A").replace("Z", "T")
+    s = s.replace("C", "Z").replace("G", "C").replace("Z", "G")
+    return s
 
 
 def test_get_complement():

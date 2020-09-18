@@ -233,7 +233,7 @@ def get_reverse_complement(s):
     Return the reverse complement of string s
     (complement reversed in order).
     """
-    return None
+    return get_complement(s)[::-1]
 
 
 def test_get_reverse_complement():
@@ -247,7 +247,7 @@ def remove_substring(substring, string):
     """
     Returns string with all occurrences of substring removed.
     """
-    return None
+    return string.replace(substring, "")
 
 
 def test_remove_substring():
